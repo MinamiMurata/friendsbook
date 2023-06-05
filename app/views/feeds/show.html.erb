@@ -1,0 +1,12 @@
+<p>
+  <strong>Picture:</strong>
+  <%= image_tag(@feed.picture.url) if @feed.picture && @feed.picture.url %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @feed.content %>
+</p>
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>
