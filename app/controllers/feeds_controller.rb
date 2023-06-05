@@ -13,7 +13,7 @@ class FeedsController < ApplicationController
   end
 
   def confirm
-    @feed = Feed.new(feed_params)
+    @feed = current_user.feeds.build(feed_params)
     render :new if @feed.invalid?
   end
 
@@ -21,29 +21,40 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.new(feed_params)
+    @feed = current_user.feeds.build(feed_params)
     if params[:back]
       render :new
     else
-      if @feed.save
-        redirect_to feeds_path, notice: "Feed was successfully created."
-      else
-        render :new
+      respond_to do |format|
+        if @feed.save
+          format.html { redirect_to feed_url(@feed), notice: "Feed was successfully created." }
+          format.json { render :show, status: :created, location: @feed }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @feed.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def update
-    if @feed.update(feed_params)
-      redirect_to feeds_path, notice: "Feed was successfully updated."
-    else
-      render :edit
+    respond_to do |format|
+      if @feed.update(feed_params)
+        format.html { redirect_to feed_url(@feed), notice: "Feed was successfully updated." }
+        format.json { render :show, status: :ok, location: @feed }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @feed.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @feed.destroy
-    redirect_to feeds_path, notice: "Feed was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to feeds_url, notice: "Feed was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -53,6 +64,6 @@ class FeedsController < ApplicationController
   end
 
   def feed_params
-    params.require(:feed).permit(:picture, :image_cache, :content)
+    params.require(:feed).permit(:picture, :picture_cache, :content)
   end
 end
