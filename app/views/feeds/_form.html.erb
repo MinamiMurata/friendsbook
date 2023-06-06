@@ -14,12 +14,12 @@
 
   <div class="field">
     <%= form.label :picture %>
-    <%= image_tag(feed.picture.url) if feed.picture && feed.picture.url %>
-    <%= form.file_field :picture %>
+    <%= image_tag(feed.picture.url, width: "300") if feed.picture && feed.picture.url %>
+    <%= form.file_field :picture, class: "p-3" %>
     <%= form.hidden_field :picture_cache %>
   </div>
 
-  <div class="field">
+  <div class="field mt-3">
     <%= form.label :content %>
     <%= form.text_area :content %>
   </div>

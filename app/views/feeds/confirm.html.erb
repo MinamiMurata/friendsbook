@@ -1,10 +1,10 @@
 <h1>確認画面</h1>
 <%= form_with(model: @feed, url: feeds_path, local: true) do |form| %>
-  <%= image_tag(@feed.picture.url) if @feed.picture && @feed.picture.url %>
+  <%= image_tag(@feed.picture.url, width: '350') if @feed.picture && @feed.picture.url %>
   <%= form.hidden_field :picture_cache %>
   <%= form.hidden_field :content %>
-  <p>Content:<%= @feed.content %></p>
-  <%= form.submit "投稿する" %>
+  <p class="mt-3">Content:<%= @feed.content %></p>
+  <%= form.submit "投稿する", class: "btn btn-outline-info" %>
 
-  <%= form.submit "戻る", name: "back" %>
+  <%= form.submit "戻る", name: "back", class: "btn btn-outline-info" %>
 <% end %>

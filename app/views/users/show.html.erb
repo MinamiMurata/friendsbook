@@ -4,6 +4,6 @@
 
 <h1><%= @user.name %>のページ</h1>
 
-<p>メールアドレス: <%= @user.email %></p>
+<p class="mt-4">メールアドレス: <%= @user.email %></p>
 
-<%= link_to 'Back', feeds_path %>
+<%= link_to 'Back', feeds_path, class: "mt-2 btn btn-outline-info btn-lg" %>

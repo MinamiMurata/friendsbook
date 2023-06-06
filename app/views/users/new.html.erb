@@ -15,18 +15,18 @@
   </div>
 <% end %>
 
-<%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<%= form_with(model: @user, local: true, class: "form-group") do |f| %>
+  <%= f.label :name, class: "mt-2" %>
+  <%= f.text_field :name, class: "form-control mt-2" %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+  <%= f.label :email, class: "mt-2" %>
+  <%= f.email_field :email, class: "form-control mt-2" %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.label :password, class: "mt-2" %>
+  <%= f.password_field :password, class: "form-control mt-2" %>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+  <%= f.label :password_confirmation, class: "mt-2" %>
+  <%= f.password_field :password_confirmation, class: "form-control mt-2" %>
 
-  <%= f.submit "Create my account" %>
+  <%= f.submit "Create my account", class: "form-control mt-5 btn btn-primary btn-lg" %>
 <% end %>
