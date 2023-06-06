@@ -9,5 +9,9 @@
   <%= @feed.content %>
 </p>
 
-<%= link_to 'Edit', edit_feed_path(@feed), class: "btn btn-outline-info" %>
-<%= link_to 'Back', feeds_path, class: "btn btn-outline-info"  %>
+<% if @feed.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_feed_path(@feed), class: "btn btn-outline-info" %>
+  <%= link_to 'Back', feeds_path, class: "btn btn-outline-info"  %>
+<% else %>
+  <%= link_to 'Back', feeds_path, class: "btn btn-outline-info"  %>
+<% end %>

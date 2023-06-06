@@ -18,9 +18,15 @@
         <td><%= image_tag(feed.picture.url, width: '350') %></td>
         <td><%= feed.content %></td>
         <td><%= feed.user.name %></td>
-        <td><%= link_to 'Show', feed, class: "btn btn-outline-info" %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed), class: "btn btn-outline-info" %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-info" %></td>
+        <% if feed.user_id == current_user.id %>
+          <td><%= link_to 'Show', feed, class: "btn btn-outline-info" %></td>
+          <td><%= link_to 'Edit', edit_feed_path(feed), class: "btn btn-outline-info" %></td>
+          <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-info" %></td>
+        <% else %>
+          <td><%= link_to 'Show', feed, class: "btn btn-outline-info" %></td>
+          <td></td>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
